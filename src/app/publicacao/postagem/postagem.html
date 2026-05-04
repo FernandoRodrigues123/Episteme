@@ -1,0 +1,64 @@
+<form [formGroup]="form" (ngSubmit)="enviar()" class="min-h-screen bg-slate-50 pt-16">
+
+  <div class="max-w-3xl mx-auto px-6">
+
+    <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-8 space-y-6">
+
+      <h1 class="text-3xl font-bold text-slate-900">
+        Nova Publicação
+      </h1>
+
+      <!-- TÍTULO -->
+      <div class="space-y-2">
+        <input
+          type="text"
+          placeholder="Título do artigo"
+          formControlName="titulo"
+          class="w-full border border-slate-300 rounded-lg p-4 text-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+        />
+
+        <p *ngIf="form.controls.titulo.touched && form.controls.titulo.invalid"
+           class="text-sm text-red-500">
+          Título inválido
+        </p>
+      </div>
+
+      <!-- EDITOR -->
+      <div class="space-y-2">
+        <textarea
+          formControlName="corpo"
+          placeholder="Escreva seu artigo..."
+          class="w-full p-4 min-h-[200px] border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
+        ></textarea>
+
+        <p *ngIf="form.controls.corpo.touched && form.controls.corpo.invalid"
+           class="text-sm text-red-500">
+          Corpo muito curto
+        </p>
+      </div>
+
+      <!-- REFERÊNCIA -->
+      <div class="space-y-2">
+        <input
+          type="text"
+          placeholder="Referência (link opcional)"
+          formControlName="referencias"
+          class="w-full border border-slate-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <!-- BOTÃO -->
+      <div class="pt-4">
+        <button
+          type="submit"
+          [disabled]="form.invalid || carregando"
+          class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50"
+        >
+          {{ carregando ? 'Publicando...' : 'Publicar' }}
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</form>

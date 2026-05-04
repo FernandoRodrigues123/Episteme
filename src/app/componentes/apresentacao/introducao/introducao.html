@@ -1,0 +1,53 @@
+<section
+    class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 to-blue-50">
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-20 left-10 w-72 h-72 bg-blue-400 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-indigo-400 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-12 items-center">
+        <div class="space-y-8">
+            <div
+                class="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">
+                <i class="bi bi-book w-4 h-4"></i>
+                contribua com o pensamento critico
+            </div>
+
+            <div class="space-y-4">
+                <h1 class="text-5xl lg:text-7xl font-bold text-slate-900 leading-tight">
+                    Episteme
+                </h1>
+                <p class="text-2xl lg:text-3xl text-slate-700">
+                    Venha expor conhecimento
+                </p>
+            </div>
+
+            <p class="text-lg text-slate-600 leading-relaxed max-w-xl">
+                Conecte-se com academicos e entusiastas do conhecimento!
+                participe de debates, pesquisas e na construção do conhecimento
+                em uma comunidade com rigor intelectual.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+                <button (click)="redirecionarParaCadastro()"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors">
+                    Começar Agora
+                    <i class="bi bi-arrow-right"></i>
+                </button>
+                <button
+                    class="border-2 border-slate-300 hover:border-slate-400 text-slate-700 px-8 py-4 rounded-lg font-semibold transition-colors">
+                    Saiba Mais
+                </button>
+            </div>
+        </div>
+
+        <div class="relative">
+            <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur-2xl opacity-20">
+            </div>
+            <!-- Aqui você pode adicionar uma imagem ou ilustração -->
+            <div class="relative bg-white/50 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+                <p class="text-slate-600">Espaço para conteúdo visual</p>
+            </div>
+        </div>
+    </div>
+</section>

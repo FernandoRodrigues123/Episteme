@@ -1,0 +1,20 @@
+/* Adicione isso se precisar de estilos específicos */
+:host {
+  display: block;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Transições suaves */
+input, button {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Estilo para quando o formulário estiver desabilitado */
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+}   
+#body{
+  margin-top: 100px;
+} 

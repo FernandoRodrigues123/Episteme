@@ -1,0 +1,36 @@
+<section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <!-- Cabeçalho -->
+        <div class="text-center mb-16 space-y-4">
+            <h2 class="text-4xl lg:text-5xl font-bold text-slate-900">
+                {{ tituloSecao }}
+            </h2>
+            <p class="text-xl text-slate-600 max-w-3xl mx-auto">
+                {{ subtituloSecao }}
+            </p>
+        </div>
+
+
+        <!-- Grid de Cards com @for -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @for (recurso of recursos; track recurso.titulo; let i = $index) {
+                <div class="group p-8 rounded-2xl bg-slate-50 hover:bg-gradient-to-br hover:from-blue-50 hover:to-indigo-50 transition-all duration-300 border border-slate-200 hover:border-blue-300 hover:shadow-lg">
+                    <!-- Ícone -->
+                    <div class="w-14 h-14 bg-blue-100 group-hover:bg-blue-600 rounded-xl flex items-center justify-center mb-6 transition-colors">
+                        <i class="{{ recurso.icone }} w-7 h-7 text-blue-600 group-hover:text-white transition-colors text-2xl"></i>
+                    </div>
+                    
+                    <!-- Título -->
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">
+                        {{ recurso.titulo }}
+                    </h3>
+                    
+                    <!-- Descrição -->
+                    <p class="text-slate-600 leading-relaxed">
+                        {{ recurso.descricao }}
+                    </p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
