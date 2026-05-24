@@ -1,10 +1,11 @@
-import { Component, OnInit, signal, computed } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { BuscaPerfil } from '../../services/buscaPerfil/busca-perfil';
 import { CommonModule, DatePipe } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
 import { inject, PLATFORM_ID } from '@angular/core';
 import { Estudante } from '../../model/estudante';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-perfil',
@@ -18,23 +19,26 @@ export class Perfil implements OnInit {
   isBrowser = isPlatformBrowser(this.platformId);
 
   estudante = signal<Estudante | null>(null);
+  login = signal<string>('');
+  token = signal<string>('');
 
   constructor(
     private router: Router,
-    private buscaPerfil: BuscaPerfil
-  ) { }
+    private buscaPerfil: BuscaPerfil,
+    private http: HttpClient) { }
 
   ngOnInit(): void {
     if (!this.isBrowser) return;
 
-    const token = localStorage.getItem('token');
-    const login = localStorage.getItem('login');
-    if (!token || !login) {
+
+    this.token.set(localStorage.getItem('token') || '');
+    this.login.set(localStorage.getItem('login') || '');
+    if (!this.token() || !this.login()) {
       this.router.navigate(['/login']);
       return;
     }
 
-    this.buscaPerfil.buscarPerfil(token, login).subscribe({
+    this.buscaPerfil.buscarPerfil(this.token(), this.login()).subscribe({
       next: (res) => {
         const dados = (res as any).estudante ?? res;
         this.estudante.set(dados);
@@ -55,7 +59,48 @@ export class Perfil implements OnInit {
 
     return idade;
   }
- editarPublicacao(pub: any) {
+  editarPublicacao(pub: any) {
     this.router.navigate(['/atualizarPublicacao/', pub.id]);
+  }
+  deletarPublicacao(pub: any) {
+
+    const confirmado = confirm(
+      'Tem certeza que deseja deletar esta publicação?'
+    );
+
+    if (!confirmado) return;
+
+    this.http.delete(
+      `http://localhost:8080/publicacoes/${this.login()}/${pub.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${this.token()}`
+        }
+      }
+    )
+      .subscribe({
+
+        next: () => {
+          const estudante = this.estudante();
+
+          if (!estudante) return;
+
+          this.estudante.set({
+            ...estudante,
+            publicacoes: {
+              ...estudante.publicacoes,
+              content: estudante.publicacoes.content.filter(
+                (p: any) => p.id !== pub.id
+              )
+            }
+          });
+
+        },
+
+        error: (err) => {
+          console.error(err);
+        }
+
+      });
   }
 }

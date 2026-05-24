@@ -6,6 +6,7 @@ import { Publicacao } from '../../../model/publicacao';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { sign } from 'crypto';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-atualizacao',
   standalone: true,
@@ -19,6 +20,7 @@ import { sign } from 'crypto';
 export class Atualizacao implements OnInit {
 
   token = localStorage.getItem('token');
+  login = localStorage.getItem('login');
 
   private platformId = inject(PLATFORM_ID);
   isBrowser = isPlatformBrowser(this.platformId);
@@ -32,7 +34,8 @@ export class Atualizacao implements OnInit {
   form: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {
 
     this.form = this.fb.group({
@@ -69,10 +72,40 @@ export class Atualizacao implements OnInit {
   }
 
   enviar() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
 
-    //vou mexe
+    this.carregando = true;
+    this.http.put(
+      'http://localhost:8080/publicacoes/' + this.login + '/' + this.idFromURI,
+      this.form.value,
+      {
+        headers: {
+          Authorization: `Bearer ${this.token}`
+        }
+      }
+    ).subscribe({
+
+      next: () => {
+
+        alert('Publicação criada');
+
+        this.form.reset();
+
+        this.carregando = false;
+        this.router.navigate(['/perfil']);
+      },
+
+      error: (err) => {
+
+        console.error(err);
+
+        this.carregando = false;
+      }
+    });
   }
-
   async carregarPublicacao(): Promise<Publicacao> {
 
     const headers = new HttpHeaders({
