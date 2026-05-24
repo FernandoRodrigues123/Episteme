@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CadastroEstudante } from '../../services/cadastro-estudante';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-estundate-form',
@@ -14,7 +15,8 @@ export class LoginEstundateForm implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private loginServ: CadastroEstudante
+    private loginServ: CadastroEstudante,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -42,7 +44,8 @@ export class LoginEstundateForm implements OnInit {
         localStorage.setItem('token', token);
         localStorage.setItem('login', dados.login) 
         // Redireciona, etc.
-        // this.router.navigate(['/dashboard']);
+        
+       this.router.navigate(['/perfil']); 
       },
       error: (erro) => {
         console.error('❌ Erro:', erro);
@@ -67,4 +70,8 @@ export class LoginEstundateForm implements OnInit {
       control.markAsTouched();
     });
   }
+}
+
+function waiter(arg0: number) {
+  throw new Error('Function not implemented.');
 }

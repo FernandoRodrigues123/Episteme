@@ -5,7 +5,7 @@
     <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-8 space-y-6">
 
       <h1 class="text-3xl font-bold text-slate-900">
-        Nova Publicação
+        Atualizar Publicação
       </h1>
 
       <!-- TÍTULO -->
@@ -17,7 +17,7 @@
           class="w-full border border-slate-300 rounded-lg p-4 text-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
         />
 
-        <p *ngIf="form.controls.titulo.touched && form.controls.titulo.invalid"
+     <p *ngIf="form.controls['titulo'].touched && form.controls['titulo'].invalid">
            class="text-sm text-red-500">
           Título inválido
         </p>
@@ -31,7 +31,7 @@
           class="w-full p-4 min-h-[200px] border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
         ></textarea>
 
-        <p *ngIf="form.controls.corpo.touched && form.controls.corpo.invalid"
+        <p *ngIf="form.controls['corpo'].touched && form.controls['corpo'].invalid"
            class="text-sm text-red-500">
           Corpo muito curto
         </p>

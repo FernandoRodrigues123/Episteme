@@ -1,9 +1,10 @@
 import { Component, OnInit, signal, computed } from '@angular/core';
 import { Router } from '@angular/router';
-import { BuscaPerfil, Estudante } from '../../services/buscaPerfil/busca-perfil';
+import { BuscaPerfil } from '../../services/buscaPerfil/busca-perfil';
 import { CommonModule, DatePipe } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
 import { inject, PLATFORM_ID } from '@angular/core';
+import { Estudante } from '../../model/estudante';
 
 @Component({
   selector: 'app-perfil',
@@ -13,7 +14,7 @@ import { inject, PLATFORM_ID } from '@angular/core';
   styleUrl: './perfil.css',
 })
 export class Perfil implements OnInit {
-   private platformId = inject(PLATFORM_ID);
+  private platformId = inject(PLATFORM_ID);
   isBrowser = isPlatformBrowser(this.platformId);
 
   estudante = signal<Estudante | null>(null);
@@ -21,10 +22,10 @@ export class Perfil implements OnInit {
   constructor(
     private router: Router,
     private buscaPerfil: BuscaPerfil
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-   if (!this.isBrowser) return;
+    if (!this.isBrowser) return;
 
     const token = localStorage.getItem('token');
     const login = localStorage.getItem('login');
@@ -53,5 +54,8 @@ export class Perfil implements OnInit {
     }
 
     return idade;
+  }
+ editarPublicacao(pub: any) {
+    this.router.navigate(['/atualizarPublicacao/', pub.id]);
   }
 }

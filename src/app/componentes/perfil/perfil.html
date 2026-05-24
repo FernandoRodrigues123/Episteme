@@ -11,10 +11,8 @@
 
         <!-- FOTO -->
         <div class="relative">
-          <img
-            [src]="e.urlImagem || 'https://via.placeholder.com/150'"
-            class="w-40 h-40 rounded-2xl object-cover border-4 border-white shadow-xl"
-          />
+          <img [src]="e.urlImagem || 'https://via.placeholder.com/150'"
+            class="w-40 h-40 rounded-2xl object-cover border-4 border-white shadow-xl" />
         </div>
 
         <!-- INFO PRINCIPAL -->
@@ -33,7 +31,7 @@
           </p>
 
           <div class="text-sm text-slate-500">
-            {{ e.dataDeNascimento | date:'dd/MM/yyyy' }} • 
+            {{ e.dataDeNascimento | date:'dd/MM/yyyy' }} •
             {{ calcularIdade(e.dataDeNascimento) }} anos
           </div>
 
@@ -85,34 +83,26 @@
       </div>
 
       <!-- PUBLICAÇÕES -->
-      <div class="lg:col-span-2 space-y-4">
+      <div *ngFor="let pub of e.publicacoes.content" class="bg-white p-6 rounded-xl shadow">
 
-        <h2 class="text-2xl font-bold">Publicações</h2>
+        <h3 class="text-xl font-bold mb-2">
+          {{ pub.titulo }}
+        </h3>
 
-        <!-- vazio -->
-        <div *ngIf="e.publicacoes.content.length === 0" class="bg-white p-6 rounded-xl shadow text-center">
-          Nenhuma publicação ainda
-        </div>
+        <p class="text-slate-600 mb-3">
+          {{ pub.corpo }}
+        </p>
 
-        <!-- lista -->
-        <div *ngFor="let pub of e.publicacoes.content"
-             class="bg-white p-6 rounded-xl shadow">
+        <div class="flex gap-3 items-center">
 
-          <h3 class="text-xl font-bold mb-2">
-            {{ pub.titulo }}
-          </h3>
-
-          <p class="text-slate-600 mb-3">
-            {{ pub.corpo }}
-          </p>
-
-          <a *ngIf="pub.referencia"
-             [href]="pub.referencia"
-             target="_blank"
-             class="text-blue-600 text-sm">
+          <a *ngIf="pub.referencias" [href]="pub.referencias" target="_blank" class="text-blue-600 text-sm">
             Ver referência
           </a>
 
+      
+          <button (click)="editarPublicacao(pub)" class="bg-gray-200 text-gray-700 px-3 py-1 rounded">
+            Editar
+          </button>
         </div>
 
       </div>

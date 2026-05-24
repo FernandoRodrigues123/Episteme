@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Estudante } from '../../model/estudante';
 
 export interface PublicacaoLeituraSemEstudante {
   id: number;
@@ -14,15 +15,7 @@ export interface Page<T> {
   totalPages: number;
   last: boolean;
 }
-export interface Estudante {
-  id: number;
-  nome: string;
-  urlImagem: string | null;
-  email: string;
-  dataDeNascimento: string;
-  areaDeEstudo: string;
-  publicacoes: Page<PublicacaoLeituraSemEstudante>;
-}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -40,5 +33,5 @@ export class BuscaPerfil {
       this.apiUrl + login,
       { headers }
     );
-  }
+  }             
 }
