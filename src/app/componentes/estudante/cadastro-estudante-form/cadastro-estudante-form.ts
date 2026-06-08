@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core'; // Adicionar OnInit
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; // Adicionar ReactiveFormsModule
-import { Router } from '@angular/router'; // CORREÇÃO: import do Angular, não do Express
-import { CadastroData, CadastroEstudante } from '../../services/cadastro-estudante';
+import { CadastroData, CadastroEstudante } from '../../../services/cadastro-estudante';
 import { CommonModule } from '@angular/common';
 
 @Component({

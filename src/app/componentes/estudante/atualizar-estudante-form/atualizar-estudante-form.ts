@@ -1,36 +1,28 @@
-import { isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Publicacao } from '../../../model/publicacao';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup,ReactiveFormsModule, Validators } from '@angular/forms';
+import { Estudante } from '../../../model/estudante';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 @Component({
-  selector: 'app-atualizacao',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ],
-  templateUrl: './atualizacao.html',
-  styleUrl: './atualizacao.css',
+  selector: 'app-atualizar-estudante-form',
+  imports: [CommonModule,
+    ReactiveFormsModule],
+  templateUrl: './atualizar-estudante-form.html',
+  styleUrl: './atualizar-estudante-form.css',
 })
-export class Atualizacao implements OnInit {
+export class AtualizarEstudanteForm implements OnInit {
+
 
   token = localStorage.getItem('token');
   login = localStorage.getItem('login');
 
-  private platformId = inject(PLATFORM_ID);
-  isBrowser = isPlatformBrowser(this.platformId);
-
-  idFromURI!: number;
-  publicacao!: Publicacao;
 
   carregando = false;
 
-
   form: FormGroup;
+  estudante!: Estudante;
+
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
@@ -38,7 +30,7 @@ export class Atualizacao implements OnInit {
   ) {
 
     this.form = this.fb.group({
-      titulo: [
+      nome: [
         '',
         [
           Validators.required,
@@ -46,7 +38,15 @@ export class Atualizacao implements OnInit {
         ]
       ],
 
-      corpo: [
+      email: [
+        '',
+        [
+          Validators.required,
+          
+        ]
+      ],
+    
+      areaDeEstudo: [
         '',
         [
           Validators.required,
@@ -54,20 +54,26 @@ export class Atualizacao implements OnInit {
         ]
       ],
 
-      referencias: ['']
+      dataDeNascimento: [
+        '',
+        [
+          Validators.required,
+        ]
+      ],
     });
   }
   async ngOnInit(): Promise<void> {
-    this.idFromURI = Number(window.location.href.split('/').pop());
-    await this.carregarPublicacao().then((res) => {
-      this.publicacao = res as Publicacao;
+  
+    await this.carregarEstudante().then((res) => {
+      this.estudante = res as Estudante;
       this.form.patchValue({
-        titulo: this.publicacao.titulo,
-        corpo: this.publicacao.corpo,
-        referencias: this.publicacao.referencias
+        nome: this.estudante.nome,
+        email: this.estudante.email,
+        areaDeEstudo: this.estudante.areaDeEstudo,
+        dataDeNascimento: this.estudante.dataDeNascimento
       });
     })
-    console.log("publicacao ", this.publicacao);
+    console.log("estudante ", this.estudante);
   }
 
   enviar() {
@@ -78,8 +84,10 @@ export class Atualizacao implements OnInit {
 
     this.carregando = true;
     this.http.put(
-      'http://localhost:8080/publicacoes/' + this.login + '/' + this.idFromURI,
+      'http://localhost:8080/estudantes/' + this.login,
+
       this.form.value,
+
       {
         headers: {
           Authorization: `Bearer ${this.token}`
@@ -89,7 +97,7 @@ export class Atualizacao implements OnInit {
 
       next: () => {
 
-        alert('Publicação criada');
+        alert('Atualização foi realizada com sucesso!');
 
         this.form.reset();
 
@@ -105,24 +113,25 @@ export class Atualizacao implements OnInit {
       }
     });
   }
-  async carregarPublicacao(): Promise<Publicacao> {
+  async carregarEstudante(): Promise<Estudante> {
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`
     });
 
     return new Promise((resolve, reject) => {
-      this.http.get<Publicacao>(`http://localhost:8080/publicacoes/${this.idFromURI}`, { headers })
+      this.http.get<Estudante>(`http://localhost:8080/estudantes`, { headers })
         .subscribe({
           next: (res) => {
             console.log("res ", res);
             resolve(res);
           },
           error: (err) => {
-            console.error("Erro ao carregar publicação: ", err);
+            console.error("Erro ao carregar estudante: ", err);
             reject(err);
           }
         });
     });
   }
+
 }

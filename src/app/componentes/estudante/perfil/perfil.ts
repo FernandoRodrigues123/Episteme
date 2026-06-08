@@ -1,10 +1,10 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { BuscaPerfil } from '../../services/buscaPerfil/busca-perfil';
+import { BuscaPerfil } from '../../../services/buscaPerfil/busca-perfil';
 import { CommonModule, DatePipe } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
 import { inject, PLATFORM_ID } from '@angular/core';
-import { Estudante } from '../../model/estudante';
+import { Estudante } from '../../../model/estudante';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -102,5 +102,39 @@ export class Perfil implements OnInit {
         }
 
       });
+  }
+  novaPublicacao() {
+    this.router.navigate(['/publicar']);
+  }
+  deletarPerfil() {
+    const confirmado = confirm(
+      'Tem certeza que deseja deletar seu perfil? Esta ação é irreversível.'
+    );
+
+    if (!confirmado) return;
+
+    this.http.delete(`http://localhost:8080/estudantes/del`,
+      {
+        headers: {
+          Authorization: `Bearer ${this.token()}`
+        }
+      }
+
+    ).subscribe({
+
+      next: () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('login');
+        this.router.navigate(['/']);
+      },
+
+      error: (err) => {
+        console.error(err);
+      }
+
+    });
+  }
+  editarPerfil() {
+    this.router.navigate(['/editarPerfil']);
   }
 }

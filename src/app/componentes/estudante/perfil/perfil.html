@@ -49,8 +49,11 @@
 
         <!-- AÇÕES -->
         <div class="flex flex-col gap-2">
-          <button class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+          <button (click)="editarPerfil()" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
             Editar Perfil
+          </button>
+          <button (click)="deletarPerfil()" class="bg-red-600 text-white px-4 py-2 rounded-lg">
+            Deletar Perfil
           </button>
         </div>
 
@@ -59,28 +62,6 @@
 
     <!-- GRID -->
     <div class="grid lg:grid-cols-3 gap-8">
-
-      <!-- INFO LATERAL -->
-      <div class="bg-white p-6 rounded-2xl shadow space-y-4">
-
-        <h2 class="text-xl font-bold">Informações</h2>
-
-        <div>
-          <strong>Nome:</strong>
-          <div>{{ e.nome }}</div>
-        </div>
-
-        <div>
-          <strong>Email:</strong>
-          <div>{{ e.email }}</div>
-        </div>
-
-        <div>
-          <strong>Área:</strong>
-          <div>{{ e.areaDeEstudo }}</div>
-        </div>
-
-      </div>
 
       <!-- PUBLICAÇÕES -->
       <div *ngFor="let pub of e.publicacoes.content" class="bg-white p-6 rounded-xl shadow">
@@ -112,6 +93,9 @@
       </div>
 
     </div>
+    <button (click)="novaPublicacao()" class="mt-8 bg-green-600 text-white px-4 py-2 rounded-lg">
+      Nova Publicação +
+    </button>
 
   </div>
 </div>

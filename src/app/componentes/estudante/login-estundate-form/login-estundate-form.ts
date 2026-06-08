@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CadastroEstudante } from '../../services/cadastro-estudante';
+import { CadastroEstudante } from '../../../services/cadastro-estudante';
 import { Router } from '@angular/router';
 
 @Component({

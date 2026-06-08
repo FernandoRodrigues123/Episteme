@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Introducao } from "./introducao/introducao";
 import { Ferramentas } from "./ferramentas/ferramentas";
 import { Explicacao } from "./explicacao/explicacao";
@@ -10,4 +10,8 @@ import { Convite } from "./convite/convite";
   templateUrl: './apresentacao.html',
   styleUrl: './apresentacao.css',
 })
-export class Apresentacao {}
+export class Apresentacao  {
+
+  
+
+}

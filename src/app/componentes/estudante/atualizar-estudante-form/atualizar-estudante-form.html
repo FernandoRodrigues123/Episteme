@@ -1,0 +1,95 @@
+<form [formGroup]="form" (ngSubmit)="enviar()" class="min-h-screen bg-slate-50 pt-16">
+
+  <div class="max-w-3xl mx-auto px-6">
+
+```
+<div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-8 space-y-6">
+
+  <h1 class="text-3xl font-bold text-slate-900">
+    Atualizar Perfil
+  </h1>
+
+  <!-- NOME -->
+  <div class="space-y-2">
+    <input
+      type="text"
+      placeholder="Nome completo"
+      formControlName="nome"
+      class="w-full border border-slate-300 rounded-lg p-4 text-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+    />
+
+    <p
+      *ngIf="form.controls['nome'].touched && form.controls['nome'].invalid"
+      class="text-sm text-red-500"
+    >
+      Nome deve possuir pelo menos 5 caracteres
+    </p>
+  </div>
+
+  <!-- EMAIL -->
+  <div class="space-y-2">
+    <input
+      type="email"
+      placeholder="E-mail"
+      formControlName="email"
+      class="w-full border border-slate-300 rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+    />
+
+    <p
+      *ngIf="form.controls['email'].touched && form.controls['email'].invalid"
+      class="text-sm text-red-500"
+    >
+      E-mail inválido
+    </p>
+  </div>
+
+  <!-- ÁREA DE ESTUDO -->
+  <div class="space-y-2">
+    <input
+      type="text"
+      placeholder="Área de estudo"
+      formControlName="areaDeEstudo"
+      class="w-full border border-slate-300 rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+    />
+
+    <p
+      *ngIf="form.controls['areaDeEstudo'].touched && form.controls['areaDeEstudo'].invalid"
+      class="text-sm text-red-500"
+    >
+      Área de estudo deve possuir pelo menos 20 caracteres
+    </p>
+  </div>
+
+  <!-- DATA DE NASCIMENTO -->
+  <div class="space-y-2">
+    <input
+      type="date"
+      formControlName="dataDeNascimento"
+      class="w-full border border-slate-300 rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+    />
+
+    <p
+      *ngIf="form.controls['dataDeNascimento'].touched && form.controls['dataDeNascimento'].invalid"
+      class="text-sm text-red-500"
+    >
+      Informe sua data de nascimento
+    </p>
+  </div>
+
+  <!-- BOTÃO -->
+  <div class="pt-4">
+    <button
+      type="submit"
+      [disabled]="form.invalid || carregando"
+      class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50"
+    >
+      {{ carregando ? 'Atualizando...' : 'Atualizar Perfil' }}
+    </button>
+  </div>
+
+</div>
+```
+
+  </div>
+
+</form>
