@@ -7,6 +7,8 @@ import { Postagem } from './componentes/publicacao/postagem/postagem';
 import { Atualizacao } from './componentes/publicacao/atualizacao/atualizacao';
 import { PublicacaoDetalhes } from './componentes/publicacao/publicacao-detalhes/publicacao-detalhes';
 import { AtualizarEstudanteForm } from './componentes/estudante/atualizar-estudante-form/atualizar-estudante-form';
+import { Feed } from './componentes/feed/feed';
+import { PesquisarEstudante } from './componentes/pesquisar-estudante/pesquisar-estudante';
 
 export const routes: Routes = [
     { path: 'cadastro-estudante', component: CadastroEstudanteForm },
@@ -14,7 +16,9 @@ export const routes: Routes = [
     { path: 'login-estudante', component: LoginEstundateForm },
     { path: 'perfil', component: Perfil },
     { path: 'publicar', component: Postagem },
-    { path: 'atualizarPublicacao/**', component: Atualizacao },
+    { path: 'atualizarPublicacao/:id', component: Atualizacao },
     { path: 'publicacao/:id',  component: PublicacaoDetalhes },
-    { path: 'editarPerfil', component: AtualizarEstudanteForm }
+    { path: 'editarPerfil', component: AtualizarEstudanteForm },
+    { path: 'feed', component: Feed},
+    { path: 'buscar', component: PesquisarEstudante}
 ];

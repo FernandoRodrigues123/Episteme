@@ -1,0 +1,112 @@
+<div id="buscar-container" class="min-h-screen bg-slate-100 py-10">
+
+  <div class="max-w-5xl mx-auto px-4">
+
+    <!-- TÍTULO -->
+    <div class="mb-8">
+
+      <h1 class="text-3xl font-bold text-slate-900">
+        Buscar estudantes
+      </h1>
+
+      <p class="text-slate-600 mt-2">
+        Encontre estudantes por nome.
+      </p>
+
+    </div>
+
+    <!-- BUSCA -->
+    <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-6 mb-8">
+
+      <div class="flex gap-3">
+
+        <input
+          type="text"
+          #inputTexto
+          placeholder="Digite um nome..."
+          class="flex-1 border border-slate-300 rounded-xl px-5 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+        />
+
+        <button   
+         (click)="buscar(inputTexto.value)"
+          class="bg-blue-600 hover:bg-blue-700 text-white px-8 rounded-xl font-semibold transition">
+          Buscar
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- RESULTADOS -->
+
+    <div class="space-y-5">
+    @if(!vazio()){
+      <div
+        *ngFor="let estudante of estudantePage().content"
+        class="bg-white rounded-2xl shadow-md border border-slate-200 p-6 hover:shadow-lg transition cursor-pointer"
+      >
+
+        <div class="flex items-center justify-between">
+
+          <div class="flex items-center gap-5">
+
+            <img
+              [src]="estudante.urlImagem || 'https://placehold.co/120'"
+              class="w-16 h-16 rounded-full object-cover border"
+            />
+
+            <div>
+
+              <h2 class="text-xl font-semibold text-slate-900">
+                {{ estudante.nome }}
+              </h2>
+
+              <p class="text-slate-600">
+                {{ estudante.areaDeEstudo }}
+              </p>
+
+              <p class="text-sm text-slate-500 mt-1">
+                {{ estudante.email }}
+              </p>
+
+            </div>
+
+          </div>
+
+          <button
+         
+            class="px-5 py-2 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white transition font-medium">
+            Ver perfil
+          </button>
+
+        </div>
+
+      </div>
+
+
+    }
+    @else{
+    <!-- SEM RESULTADOS -->
+
+    <div
+      
+      class="bg-white rounded-2xl border border-slate-200 shadow-md py-16 text-center"
+    >
+
+      <div class="text-6xl mb-4">
+        🔍
+      </div>
+
+      <h2 class="text-2xl font-semibold text-slate-700">
+        Nenhum estudante encontrado
+      </h2>
+
+      <p class="text-slate-500 mt-2">
+        Tente pesquisar utilizando outro nome.
+      </p>
+
+    </div>
+    }
+  </div>
+
+</div>

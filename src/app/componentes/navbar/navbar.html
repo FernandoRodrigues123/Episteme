@@ -1,68 +1,54 @@
 <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-200 shadow-sm">
   <div class="max-w-7xl mx-auto px-6">
-    <div class="flex items-center justify-between h-16">
-      <!-- Logo -->
-      <a href="#" class="flex items-center gap-2 group">
-        <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
+    <div class="flex items-center justify-between h-16"> <!-- Logo --> <a href="/feed"
+        class="flex items-center gap-2 group">
+        <div
+          class="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
           <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
           </svg>
-        </div>
-        <span class="text-2xl font-bold text-slate-900">Episteme</span>
+        </div> <span class="text-2xl font-bold text-slate-900">Episteme</span>
       </a>
 
-      <!-- Desktop Menu -->
-      <div class="hidden md:flex items-center gap-8">
-        <a href="#recursos" class="text-slate-700 hover:text-blue-600 font-medium transition-colors">Recursos</a>
-        <a href="#como-funciona" class="text-slate-700 hover:text-blue-600 font-medium transition-colors">Como Funciona</a>
-        <a href="#comunidade" class="text-slate-700 hover:text-blue-600 font-medium transition-colors">Comunidade</a>
-        <a href="#sobre" class="text-slate-700 hover:text-blue-600 font-medium transition-colors">Sobre</a>
-      </div>
 
+      <div class="hidden md:flex items-center gap-8"> <a href="#recursos"
+          class="text-slate-700 hover:text-blue-600 font-medium transition-colors">Recursos</a> <a href="#como-funciona"
+          class="text-slate-700 hover:text-blue-600 font-medium transition-colors">Como Funciona</a> <a
+          href="#comunidade" class="text-slate-700 hover:text-blue-600 font-medium transition-colors">Comunidade</a> <a
+          href="#sobre" class="text-slate-700 hover:text-blue-600 font-medium transition-colors">Sobre</a> </div>
       <!-- Desktop Actions -->
-      <div class="hidden md:flex items-center gap-4">
-        <button (click)="redirecionarParaLogin()" class="text-slate-700 hover:text-blue-600 font-semibold transition-colors">
-          Entrar
-        </button>
-        <button (click)="redirecionarParaCadastro()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-2.5 rounded-lg font-semibold transition-all shadow-md hover:shadow-lg">
-          Criar Conta
-        </button>
-      </div>
+      <div class="hidden md:flex items-center gap-4"> <button (click)="redirecionarParaLogin()"
+          class="text-slate-700 hover:text-blue-600 font-semibold transition-colors"> Entrar </button> <button
+          (click)="redirecionarParaCadastro()"
+          class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-2.5 rounded-lg font-semibold transition-all shadow-md hover:shadow-lg">
+          Criar Conta </button>
+        </div>
 
       <!-- Mobile Menu Button -->
-      <button (click)="toggleMenu()" class="md:hidden p-2 text-slate-700 hover:bg-slate-100 rounded-lg transition-colors" aria-label="Menu">
-        @if (isMenuOpen) {
-          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        } @else {
-          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        }
-      </button>
+      <button (click)="toggleMenu()"
+        class="md:hidden p-2 text-slate-700 hover:bg-slate-100 rounded-lg transition-colors" aria-label="Menu"> @if
+        (isMenuOpen) {
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg> } @else { <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg> } </button>
     </div>
-
-    <!-- Mobile Menu -->
     @if (isMenuOpen) {
-      <div class="md:hidden py-4 space-y-3 border-t border-slate-200 animate-in fade-in slide-in-from-top-2 duration-200">
-        <a href="#recursos" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-medium transition-colors">Recursos</a>
-        <a href="#como-funciona" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-medium transition-colors">Como Funciona</a>
-        <a href="#comunidade" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-medium transition-colors">Comunidade</a>
-        <a href="#sobre" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-medium transition-colors">Sobre</a>
-        <div class="pt-3 space-y-2 border-t border-slate-200">
-          <button (click)="redirecionarParaLogin()" class="w-full text-left px-4 py-2 text-slate-700 hover:bg-slate-100 rounded-lg font-semibold transition-colors">
-            Entrar
-          </button>
-          <button (click)="redirecionarParaCadastro()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2.5 rounded-lg font-semibold shadow-md">
-            Criar Conta
-          </button>
-        </div>
-      </div>
-    }
+
+    <div class="md:hidden py-4 space-y-3 border-t border-slate-200"> ...
+      menu visitante ... </div> }
+    <div class="md:hidden py-4 space-y-3 border-t border-slate-200"> <a href="/feed"
+        class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-medium">
+        Feed </a>
+      <a href="/perfil"
+        class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-medium"> Perfil </a>
+      <button (click)="sair()"
+        class="w-full text-left px-4 py-2 text-slate-700 hover:bg-slate-100 rounded-lg font-semibold"> Sair </button>
+    </div>
   </div>
 </nav>

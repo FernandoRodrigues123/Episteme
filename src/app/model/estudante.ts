@@ -10,3 +10,13 @@ export interface Estudante {
   areaDeEstudo: string;
   publicacoes: Page<Publicacao>;
 }
+export interface EstudanteSlim {
+  id: number;
+  nome: string;
+  urlImagem: string | null;
+  email: string;
+  dataDeNascimento: string;
+  areaDeEstudo: string;
+
+  
+}

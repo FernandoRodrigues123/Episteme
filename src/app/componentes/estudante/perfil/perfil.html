@@ -64,7 +64,8 @@
     <div class="grid lg:grid-cols-3 gap-8">
 
       <!-- PUBLICAÇÕES -->
-      <div *ngFor="let pub of e.publicacoes.content" class="bg-white p-6 rounded-xl shadow">
+      <div *ngFor="let pub of e.publicacoes.content" class="bg-white p-6 rounded-xl shadow"
+      (click)="handleClick(pub.id)" >
 
         <h3 class="text-xl font-bold mb-2">
           {{ pub.titulo }}

@@ -137,4 +137,7 @@ export class Perfil implements OnInit {
   editarPerfil() {
     this.router.navigate(['/editarPerfil']);
   }
+  handleClick(id:any): void {
+    this.router.navigate(['/publicacao/', id]);
+  }
 }
